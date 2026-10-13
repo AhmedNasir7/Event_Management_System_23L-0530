@@ -29,6 +29,8 @@ function Events() {
                 const data = await response.json();
                 if (data._embedded && data._embedded.events) {
                     setEvents(data._embedded.events);
+                } else {
+                    setEvents([]);
                 }
             } catch (error) {
                 console.error("Error fetching events:", error);
@@ -38,10 +40,12 @@ function Events() {
         const Search_Rock = () => {
             const fetchEvents = async () => {
                 try {
-                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/genres/KnvZeV7vJ1P.json?apikey=${apikey}`);
+                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apikey}&classificationName=Rock`);
                     const data = await response.json();
                     if (data._embedded && data._embedded.events) {
                         setEvents(data._embedded.events);
+                    } else {
+                        setEvents([]);
                     }
                 } catch (error) {
                     console.error("Error fetching events:", error);
@@ -54,10 +58,12 @@ function Events() {
         const Search_Basketball = () => {
             const fetchEvents = async () => {
                 try {
-                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/genres/KnvZeV7vAel.json?apikey=${apikey}`);
+                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apikey}&classificationName=Basketball`);
                     const data = await response.json();
                     if (data._embedded && data._embedded.events) {
                         setEvents(data._embedded.events);
+                    } else {
+                        setEvents([]);
                     }
                 } catch (error) {
                     console.error("Error fetching events:", error);
@@ -73,7 +79,7 @@ function Events() {
         } else {
             fetchEvents();
         }
-    }, [isAuth, navigate, apikey, SearchGenre]);
+    }, [isAuth, apikey, SearchGenre]);
 
 
     return (
@@ -82,10 +88,10 @@ function Events() {
             <div>
                 <div className="flex flex-row justify-between">
                     <div>
-                        <select name="genre" id="" className="border rounded-lg border-black p-2 px-4" >
+                        <select name="genre" id="" onChange={(e) => setSearchGenre(e.target.value)} className="border rounded-lg border-black p-2 px-4" >
                             <option value="">All Genres</option>
-                            <option value="Rock" onChange={(e) => setSearchGenre(e.target.value)}>Rock</option>
-                            <option value="Basketball" onChange={(e) => setSearchGenre(e.target.value)}>Basketball</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Basketball">Basketball</option>
                         </select>
                     </div>
                     <input type="text" placeholder="Search" className="border rounded-lg border-black p-2" />
