@@ -9,6 +9,7 @@ function Events() {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const apikey = process.env.REACT_APP_API_KEY;
+    const [SearchGenre, setSearchGenre] = useState();
 
     const gotoEventDetails = (eventId) => {
         navigate(`/events/${eventId}`);
@@ -34,14 +35,61 @@ function Events() {
             }
         };
 
-        fetchEvents();
-    }, [isAuth, navigate, apikey]);
+        const Search_Rock = () => {
+            const fetchEvents = async () => {
+                try {
+                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/genres/KnvZeV7vJ1P.json?apikey=${apikey}`);
+                    const data = await response.json();
+                    if (data._embedded && data._embedded.events) {
+                        setEvents(data._embedded.events);
+                    }
+                } catch (error) {
+                    console.error("Error fetching events:", error);
+                }
+            };
+
+            fetchEvents();
+        }
+
+        const Search_Basketball = () => {
+            const fetchEvents = async () => {
+                try {
+                    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/genres/KnvZeV7vAel.json?apikey=${apikey}`);
+                    const data = await response.json();
+                    if (data._embedded && data._embedded.events) {
+                        setEvents(data._embedded.events);
+                    }
+                } catch (error) {
+                    console.error("Error fetching events:", error);
+                }
+            };
+            fetchEvents();
+        }
+
+        if (SearchGenre === "Rock") {
+            Search_Rock();
+        } else if (SearchGenre === "Basketball") {
+            Search_Basketball();
+        } else {
+            fetchEvents();
+        }
+    }, [isAuth, navigate, apikey, SearchGenre]);
 
 
     return (
         <div className="max-w-7xl mx-auto p-4">
             <h1 className="text-3xl font-bold text-emerald-900 mb-6">Events</h1>
             <div>
+                <div className="flex flex-row justify-between">
+                    <div>
+                        <select name="genre" id="" className="border rounded-lg border-black p-2 px-4" >
+                            <option value="">All Genres</option>
+                            <option value="Rock" onChange={(e) => setSearchGenre(e.target.value)}>Rock</option>
+                            <option value="Basketball" onChange={(e) => setSearchGenre(e.target.value)}>Basketball</option>
+                        </select>
+                    </div>
+                    <input type="text" placeholder="Search" className="border rounded-lg border-black p-2" />
+                </div>
                 {events.map((event) => (
                     <div key={event.id} className="border rounded-lg overflow-hidden bg-green-300 m-3" onClick={() => gotoEventDetails(event.id)}>
                         <div className="p-4 flex justify-between items-center">
