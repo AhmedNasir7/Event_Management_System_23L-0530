@@ -9,7 +9,6 @@ function Events() {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const apikey = process.env.REACT_APP_API_KEY;
-    const [FilterGenre, setFilterGenre] = useState();
     const [SearchKeyword, setSearchKeyword] = useState();
 
     const gotoEventDetails = (eventId) => {
@@ -57,6 +56,7 @@ function Events() {
             const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apikey}`);
             const data = await response.json();
             if (data._embedded && data._embedded.events) {
+                console.log(data);
                 setEvents(data._embedded.events);
             } else {
                 setEvents([]);
