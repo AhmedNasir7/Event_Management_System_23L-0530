@@ -36,9 +36,9 @@ function EventsDetails() {
                     </div>
                     <h1 className="text-gray-800  text-2xl font-bold text-center m-4">Attractions</h1>
                     {event_details?._embedded?.attractions?.map((attraction) => (
-                        <div key={attraction.id} className="border rounded-lg overflow-hidden bg-blue-300 m-3">
+                        <div key={attraction.id} className="border border-emerald-950 border-2 rounded-lg overflow-hidden bg-green-900 m-3">
                             <div className="p-4 flex justify-between items-center">
-                                <h2 className="text-xl font-bold mb-2">{attraction.name}</h2>
+                                <h2 className="text-xl font-bold mb-2 text-white" >{attraction.name}</h2>
                             </div>
                         </div>
                     ))}
