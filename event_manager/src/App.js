@@ -5,6 +5,7 @@ import Login from './Login';
 import Events from './Events';
 import Navbar from './Navbar';
 import EventsDetails from './EventsDetails';
+import MyEvents from './MyEvents';
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path='/events' element={<Events />} />
           <Route path='/events/:id' element={<EventsDetails />} />
+          <Route path='/my-events' element={<MyEvents />} />
         </Routes>
       </BrowserRouter>
     </div>

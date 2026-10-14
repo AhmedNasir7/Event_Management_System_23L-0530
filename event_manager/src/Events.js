@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import MyEvents from "./MyEvents";
 function Events() {
 
 
@@ -80,7 +81,10 @@ function Events() {
 
     return (
         <div className="max-w-7xl mx-auto p-4">
-            <h1 className="text-3xl font-bold text-emerald-900 mb-6">Events</h1>
+            <div className="flex flex-row gap-2 justify-between">
+                <h1 className="text-3xl font-bold text-emerald-900 mb-6">Events</h1>
+                <button onClick={() => navigate('/my-events')} className="border h-fit rounded-xl border-black border-2 hover:bg-emerald-700 hover:text-white py-3 px-4 bg-emerald-200">MyEvents</button>
+            </div>
             <div>
                 <div className="flex flex-row justify-between m-3">
                     <div>
@@ -106,7 +110,7 @@ function Events() {
                     </div>
                     <div className="flex flex-row gap-2">
                         <input type="text" placeholder="Search" className="border rounded-lg border-black p-2" onChange={(e) => setSearchKeyword(e.target.value)} />
-                        <button onClick={() => SearchEvents(SearchKeyword)} className="border rounded-lg border-black p-2">Search</button>
+                        <button onClick={() => SearchEvents(SearchKeyword)} className="border rounded-lg border-black p-2 hover:bg-emerald-700 hover:text-white">Search</button>
                     </div>
                 </div>
 
