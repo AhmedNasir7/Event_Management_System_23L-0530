@@ -83,12 +83,12 @@ function Events() {
         <div className="max-w-7xl mx-auto p-4">
             <div className="flex flex-row gap-2 justify-between">
                 <h1 className="text-3xl font-bold text-emerald-900 mb-6">Events</h1>
-                <button onClick={() => navigate('/my-events')} className="border h-fit rounded-xl border-black border-2 hover:bg-emerald-700 hover:text-white py-3 px-4 bg-emerald-200">MyEvents</button>
+                <button onClick={() => navigate('/my-events')} className="border w-[15%] h-fit rounded-xl border-black border-2 hover:bg-emerald-700 hover:text-white py-3 px-4 bg-emerald-200">MyEvents</button>
             </div>
             <div>
                 <div className="flex flex-row justify-between m-3">
                     <div>
-                        <select name="genre" id="genre" className="border rounded-lg border-black p-2 px-4"
+                        <select name="genre" id="genre" className="border bg-emerald-900 text-white font-bold rounded-lg border-black p-2 px-4"
                             onChange={(e) => {
                                 const selected = e.target.value;
                                 if (selected === "Rock") {
